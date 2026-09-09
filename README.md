@@ -6,6 +6,8 @@ Linux video and Funscript player for the Lovense Solace Pro with direct Bluetoot
 
 **v1.2.3 — Futuristic Bilingual Interface**
 
+![Solace Pro Player v1.2.3](sceenshot.png)
+
 ## What's new in v1.2.3
 
 - New futuristic dark/cyan control interface
@@ -49,10 +51,8 @@ Linux video and Funscript player for the Lovense Solace Pro with direct Bluetoot
 
 ## Run
 
-Place the current v1.2.3 Python script in the repository and run it with Python 3, for example:
-
 ```bash
-python3 Solace-Pro-Funscript-Player-v1.2.3-Visible-FR-EN.py
+python3 Solace-Pro-Funscript-Player-v1.2.3.py
 ```
 
 The application uses an included direct-BLE engine and does not require Intiface.
