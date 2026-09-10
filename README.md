@@ -4,41 +4,46 @@ Linux video and Funscript player for the Lovense Solace Pro with direct Bluetoot
 
 ## Current release
 
-**v1.2.3 — Futuristic Bilingual Interface**
+**v1.2.10 — Control Core UI & Live HUD**
 
-![Solace Pro Player v1.2.3](sceenshot.png)
+![Solace Pro Funscript Player v1.2.10](sceenshot.png)
 
-## What's new in v1.2.3
+## What's new in v1.2.10
 
-- New futuristic dark/cyan control interface
-- Highly visible **FR / EN** language selector in the header
-- French and English interface with persistent language selection
-- Remembers the last selected folder and video
-- Restores the last video when the application starts
-- Optional per-video playback resume
-- Periodic resume-position saving
-- Resume position saved when playback is stopped
-- Completed videos are removed from the resume-position history
-- More robust atomic configuration saving
-- More robust Funscript loading, including concatenated JSON blocks
-- Improved media/folder controls and timeline presentation
+- Redesigned **SOLACE // CONTROL CORE** interface
+- New live technical HUD with Funscript position and motion telemetry
+- Live Motion Core visualization
+- Current position, BLE response, amplification and active-range meters
+- Improved playlist with persistent visible selection and current-video indicators
+- Direct playlist item selection and playback
+- Playlist folder name and video count display
+- Collapsible Media Source, Motion Matrix, Playlist and Options sections
+- Three selectable interface themes: Cyber Blue, Matrix Green and Purple Neon
+- Improved FR / EN language controls
+- Persistent last-folder and last-video restoration
+- Optional per-video playback resume from the last saved position
+- Interactive Funscript timeline with seek controls
+- Improved use of screen space for large desktop displays
 
 ## Features
 
 - Direct BLE control for Lovense Solace Pro
-- MPV video playback
-- Funscript synchronization
+- No Intiface required
+- MPV video playback and synchronization
+- Local Funscript loading
 - Interactive Funscript timeline
 - Click/drag seeking and ±10 second controls
 - Adjustable minimum and maximum positions
 - Adjustable BLE responsiveness
 - Motion amplification control
+- Live motion and telemetry HUD
 - Folder playlist playback
 - Automatic next-video playback
 - Optional deletion of completed video and matching Funscript
 - Persistent per-video resume positions
 - Last folder/video restoration
 - French / English interface
+- Multiple interface themes
 - Futuristic Linux desktop GUI
 
 ## Requirements
@@ -49,10 +54,12 @@ Linux video and Funscript player for the Lovense Solace Pro with direct Bluetoot
 - MPV
 - Lovense Solace Pro
 
+Install the Python dependencies listed in `requirements.txt`.
+
 ## Run
 
 ```bash
-python3 Solace-Pro-Funscript-Player-v1.2.3.py
+python3 Solace-Pro-Funscript-Player-v1.2.10.py
 ```
 
 The application uses an included direct-BLE engine and does not require Intiface.
