@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
-from __future__ import annotations
+"""Solace Pro application and embedded direct-BLE engine."""
 
+from __future__ import annotations
 import base64
 import json
 import os
@@ -13,34 +13,9 @@ from pathlib import Path
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
-PLAYER = Path.home() / ".cache/solace-player/solace-pro-ble-direct-engine.py"
-APP_VERSION = "v1.2.10-TEST"
-APP_NAME = f"Solace Funscript Player {APP_VERSION}"
-PYTHON = Path.home() / "buttplug-player-venv/bin/python"
-CONFIG = Path.home() / ".config/solace-player-gui.json"
-VIDEO_EXTENSIONS = {".mp4", ".mkv", ".avi", ".mov", ".webm", ".m4v"}
-VIDEO_TYPES = (
-    ("Vidéos", "*.mp4 *.mkv *.avi *.mov *.webm *.m4v"),
-    ("Tous les fichiers", "*"),
-)
-
-COLORS = {
-    "bg": "#050810",
-    "panel": "#0A1020",
-    "panel_alt": "#0F1830",
-    "border": "#173A5E",
-    "text": "#EAF8FF",
-    "muted": "#78A0B8",
-    "accent": "#00CFFF",
-    "accent_hover": "#59E6FF",
-    "success": "#35F2A1",
-    "warning": "#FFC857",
-    "danger": "#FF4D7D",
-    "track": "#14243B",
-}
+from .settings import *  # noqa: F403,F401
 
 ENGINE_BUNDLE = 'c-pO7&2rp0lD^kdVA!$IEO(Krk}OA0ZC6LQJ@SlZ{G+hE-i=Tz7^osj;+REp2vR?xQAc0*y!!xq+E~Xt!raDh(oeFP_#pujq~zY!!LA}R6NyCrd`O_a`psU=%e{4y?Xm2N6t~r7o*hiKWxgX(w5_YUWKl$tU6Gd+p;?w!v`X@fPbT_Vc~Q`kv*tU$%{ED{zpfL`HkJPNXP#&JbI$cAo?K)!ZNBB3kF4R~^|~nY4dX5KZS%2WyJDN9&Dd44V^a5mR+nkA){39NSNWp4Et2d)KYyOxP9{}(yPOdC69ns&(U1E55BTLpny{>z$uFlHFaj$l>}JD?iX02Nqq59PDWfQptn$T2{PSMtah)=9A`DCZ@i!&^AAcuw%|UGVW9GHg#~H6^nz8^`Vw!RC)84wSsv@l~f+D52tPHMjo#++Ykfp^+2580F7D+)8DVqdAU0jqjW>OVz*2q9puE4w@uVPk~^2JpATT)m@a(c_b<VQD2<?l}?lhe1ap1(MXPLJMwIDT<NR>XU{|8y~*&lkabzJCxrUB^#@^*TNb=(FGM&)L(>;j_a7PxJljyW{sJ*Zw%yi{~%?faJKA;bp#K{*>$yFWltWHo4g2c}h1d0A~qcUcrWLE?J2F=1nG(O-eZ@uZyeWlNWNGVzvbbPqL(nBA>H#J5!Dqq3bNgC{q%APu}DiTQ(*_%FrMLeT;8?vZZ>hc*tLcJmA9rZ1Q!z-Lev1tv%0vQ?kF*j8{<-!`t~pycA(3W&!ihAjH%pFa+|tT9R#=(+cPp^KkB(NJUG0jr8Fzhq%tOWaCd8g6m80hTdxuD9-Piks1#COSU}|h3qEb75Aq$rBDK>8Vf2OUwwQ2GWwS{$N#36B|Lrm;!n}(`*%mrUr(KaLe8pn3LhZ8{g*W5tWVd3diRfB)1=8=;RUE()>#IUqBPG7e=3xVw5gpUv>u>wRr*~kOr1RLrwy;NjgzQkkejpKE0veto*FsHX{}9~bLQI$*jC^vV}%dybJ$YJJn&vFy%@sxFb8s;tTAUXP+of^I5Vx)@{!jkA3|^1^If3?&e!3hrZ16%6L7)~g=H+~j7(FCkn07{Zb!3N1&{i+Bq@0885D<ep%#1?)~c_Ow9yM`1gMqDOke>5>4!j&?>>KOjNyv%Zy;=2lbg}sp=^i>dJFN66qxeDxZV}qcGEjg&CXludCrK}ih{@Om-|`AicsQdm6v?wdovICmfo}_nT9Oe<S{1XZy<YNS(<!VU_m8}p*FQqGt)CNtRyqi`?BuXTRs=#3Li-_GokiFAf^=sLp@Hjl5MU`wVoXw9z5%ZEqDbEjiTK#H{ujjxdee(sAT6kQk+pEz&~&#izZDnHtSRp<6Fp!6w0=+(u^!@`6c58U^=GV2My1Clo-ZLuI#j%<~0vm&NuyNN>(ewm6k4B*~|=W0ers!EWqmxf<14{itp+Si;pxRCR?YtY2Su2XLd$MOZGDp`U7Bzf|b>+$_^Rbu_Y$=eo|0^rArB`>%?;AnUXvy<$T&;l2>44TE46^zA2NU8U!Z~qY^6oimT*R)kVtA62z_W&-pnl?b*4_fHu_RNaG-h&=Y)Fzgo@2!$+u9(rb_@FhI#@998V5@<pnEC|h}TwGF-v0Q`FpYZc7i$lcQIO6`z;JbnA-ck+=zl*Bgz5H(EsrrrUj=Jrfven8^yAjC2s)S9|7h)n^Tofv0u29M9fg!2O6r3=I$o0YJYkK^<2R|6yB-x`c!*Y<q<=NW-i2>L4nguoi97=({Alxq8RGwF~P1@QVHq!X;dOz_I67O-K9Z7Xf_Qf5X-pN-5OxD)x6i>*Wk=0JuSiIYv`m><A^D#>bQy})6lr;34qUq+$wUI>u0bBC;9;D#U;w_H-dnMW({+zqP$r2y@Y-uUww*(I3|n~s^q3lzZYNE`}P`F~=!BJ0e^``d!4j~{4S%g<A{j!r`;gM$9xBy%^TTqnJ-K80Wg6%G9q0f#-PZ&b=UOCbIB*EfOP8=76R^%hsLq2tSsXTjq9Y<`Xj9a-UHU(c43NGgkh0Sq7F(epwkLwQgHV@A?UAtLu(@TxVs@4aGVs}m^rE~H?zILi_NKzBK~E5uWMqa2U-v6p%QGmyhN5+z#m291G+yg@5U((^Vk!rCM#C!%^cwuAf%4kmJ=*pOK`a>vPcD@y^8-!rnRErQ+e5-$v2mlD74NR&(XSdmDLGCMg|c5y=aUsNU+mx@oA2ItwTQ9)1@bJ9@*<pgBW`eU^KvW0`}+?-IgKoeE-5&esWp>B!YDG=&|B?92X7J(!KN#a4bW`nBV5D)@y3m|_YML>P-?XV-+V(|HfW`J1XY0T9=TP(2AERyPq9z-0`I0nSQ%}u|0gIK_PY-KqGQw=~SIv~TP)H4!8Z)hXa%4c4WSZUKz;sZsd65x^e4_0bvq#(|v{b9N6VV73&p%u341UxTkcENmbfTx{|=}hyTmYP*fJb|chu$;t6iJMLg`BSk_1Tgh3FB1;X`p(wuo_GWDe);)738W6}a$YfVr<A_mJNV`2|L*hjE5$~vKbX<*2HzgM&m?i9WDRwbLG@Qwi}`fGBwJ5SRI$K3uM#R3f%tdkvV#4;&T>rtNLzn>KXvUfR7glgCXNEwtUn-Se6}3a?DN0F;2WjOlH39Dy*D&-yW_A34^>1z#%&zlvGv|D7`DWre|UAI++pw4hf{(Dhr;^YSwVbpPk6^89_tAvWW7o@qE5(3neE~*PWUFj0`#g^)g0f*U+^?eAOdB*v4Nh1XaY9Lp}O@u4#iqy{qBd0d>PhIb4%RZVi%8JC)Fj?&kv`8V{KqGPqu13F{mYA;tqpztB$v`u^mOOnfD4Tg1gT6^QTI<FDJ{69?g`8M43KEAcx;cHSY<2($Q|#d;I%~0Ax_Hb5iCF-h}|-U*jPMU|WJ#`C+jiTAZyK5_I)+`N(cpDc!AOO5!DPXRSHf##gI_R)!6bGAlwYPmSye^h6djrx25U_CR9l>=?kc+Iavtn7E92^7#|ssZ0D9K_Mj3RCX>hu+nnS&JX6ohT7G797%zl1^j@DZ4*XNxfGLLNzsKM-B&_k4aPE-!rqSYij<!};b&ZEm?d}{d|;jBy#!<o3g7kHFIDMp!n#i4DOBU@UI=Js<*dZm6fP?#qn>al`9^lD1VxCWQ|z1K95yz?eK*+6Llmu%ZhwhsEXT`?$Vk%6jzZAyvkcVB#t$-Ka{l>$VuqN&xh6))4b|T}b6)qMtK?dbBqo9l4bExz5kP=1zwi}y3Sm2qrw>v7QGA^`c&|&?fJi{q8_Z~?-Zj8!Ng5xX5ebr(Dje@|KN-X5tNm#|D7$!VHWH+EDV~hiOC26#%jOxzhX^n8`iibo7Lu2&ggkN#JX=vERZ@P(c6kN%GmaQ(nnIeyHl-np$-v^ACQL2Y)I!hL+l?sSB#AF)v$T&@o2I+&thG%f%VFg@T|ga<(7)T6nI6-cREgECX-{ZicCB?6a3#))W<#3mJmOZq+49Y!#eCjw_S!jUih<UHEkO4kbR)52xfuk=%TrdJf+d!Bn)UvlvA#`E<CNCf<}%t9SN>HJvs||397mfN7gb3kT3+ZDAedhsceF?D;YkjFNo{7NJuO(`!9a!=dqI%p0pu^3Ax-TUknA=rxQ6J+uUEH>+iyRD9|t(rD$C6SX?T@nMO_6+u?a9uvT}82Oy=Goe$vipHZjw-u!LH8S?g4AbtmepIoe);XX$=ksOGA^?hw9#a2Gv6VY5W<`NUxAlv;CzQiG7)6d=9k0)T=0<>{3^uaeCReWYwLH?5690TZJ+Cx!|W9^qlW-^0mU??VD`%Sr)Q%>^4+vwH`iw_RSCgBe<n4cT<JyQ3QXj~lzcOKuxKt8OpdH^jSlvAtc4));apt4l+;-oZRt$p-s0n|p|rNV%K&7(Cnjno*EK(@1uKMQV~{fK|$}E-KNt)dk?_3L%y906exb-t|wk+D?@|p5YZfcO1R8qv5f-Z|ui-a)A)TmzQ?J)8pSCzj;3+?br85?_L{D(A(0ZE?7S!$r4?HOQ+z`@O5S>)|ytW+nc;P-W3wTvDk6I-S#4^QPp<iHPiw1WNB6~+#<^60l__=u7u>x+c%`Hk`x;V2D0sYb<dTj<Ga(7lwL5c$eoUJNSaNtd4k0xoNw=c`T0M(`_h(y-t-yBKbd>eNe_yvl4^Ifw8Vi;DMY)b0B?<C{_UK?TUTPN{MEA932ZXlBgSoMbGb`o+W0-gn^v^EeThlNu?1w?<Yt8hDNr|o<dOyuvb^4km*NN)zQ-(O6%&BaMqro^s$Jo}sM47p&<V(A*s160<}H{yOOx!Q-*al54><PAyw1j5x}QV3)!wS}vu4eZ3CfnyC>AM4-iGp>cT}X80A1Mb5!yyaEn1{mq-&jZmno$fzTj-=n*tCGTzb-kafE0U5Awpf{j#7nXV%3Hx%WFsYfdgoiAGe-W*iDNJl+Brg%pzE4xIop28y4a&dH94U1S)EBzHwqh0H9ogD#72ZG4WfZ5}T60l2|ikhv!TUATYP+L{-P#nG-#tE7OCE2ri)iOB<LK_f*>3mWE;IivuM7Fk(<ZwnfIrZnsIt@N~@#Qt>Goh#-El_+-H)y2}S8CdhW6s?&ZEfL`3MaAA_47uNIYXyJ+Q7(E%ONQfyFozV1&ftxn_H6VKy<v0_bc1!Cr+(|U*73b3s65BH9(rCR&jp8gktD!_!Oq50_uTAYa9#+~e^+>BH8PZz<+;x<VKgaW)N+GSDvv>g1jkec4_IN;QQNY78^B^=s~Idjtd9+BdbxM}kfE0mzl`lyIH3E0e&mwe!F2clyc-RT+YP$Qz##jN9b{)5bqly6&%o5Uc+7=~0Pkz*%$0Aq5W3NhPkZWW60qL|c0B~p|AI66q6-NuL2hS<@``syLWBa5EZ}|-$`7Em7XpDd$U558aW!`aiNpp~+s#{&jv;5`j7>yq#!gfMp2q9B4@i+o4rGWxl;1{p?nmB@x1h$arJ`L+RtUscOn=qQQya}F_i~(7^pdI$)PA5qI_Wz1_saD{aQ=>{0PKCxIZ$&XEl0AlXtMm;b$7ZuGr3fK@n5y&9UIei#u^xdS7@7-QITg*hD8J0B?Mcph<R9cmEW?`WaSd{R^;=40hUTQAa3m2VN0(Tw<2I6a~}4DTDZ%Zr2nt!4=*&yireh2L-XPUBp^Umkev)PC^8z}7QxkU?Ux`UXt_@u{^Z&*fh)KqjkIJd0MV=(=;M`$-+iUz6RH0c+j;he;4-h%SfF0Kq~JEc2G6=WxDMv%n)^zhz~&O}@0uBQO|uK9G#~vr=pb@i5Lk{wvd%V60fyUv(*2E9FEUI+i1W%p4Y~++s8+g~wKKJ5(+3Q_Qgnl4%^n5Rbi%-<)5pqn&Ij<s$VCPT-G40aI=O85+wfqEr_+BOI5ClojZ@#ri7XG|`v+KfUY8q2?o`}}2Et*u5FLcE`Vp_Zk@s83N0;*CWuUT52GdR3?0O*A%)fOvC!EHYMmMhr$v)k_IE6J6J^JC$hDIL6s^8u`x{df_rW%P~+&<i52R*fac7WUVLCop|U&c1x@!N=pakE{nZ4_;)B24E-*pJlIWL5_V)&GOOs_pe<R%`fh_4RLA;<4WiJ#?h{rJAcvxY46r$}Z*SPt8@IusQTu*9oLjaVk;DW^Qvx@w~hc7aLB*OLZV6KI1mjO{H{~WTH_^)qCF)Aj%sdXlnWxQ4nCGF;I<02#V^qU@MXNusOG-by}^Sh4WDn=wiXH;TAXDHShj7tK8}gF^}_tX9hak4ro4qKy#?24~bYjAVRd6g0{`{E5(?T2_!slnq=|dd=xeqw8#T1qB1wI%Zs2Zk5_pK8#pK=<DP^KU-)it%3H-=JNnuAs04AeD4L+-Bk4_RfGJ#&>N})@Lxtmx0xq-<1yzB<HkB2tq4*$<ELGGQ)y%@T9Vn)s_s%$)9wKljI|`5=I2$RzDjtT9C`9|_1a%26>&!RLLlNIj68y0Ww!))GTwjVJG(i-p-|+N)IxGz|o%}B=bG9@'
-
 
 def ensure_internal_engine() -> None:
     PLAYER.parent.mkdir(parents=True, exist_ok=True)
@@ -53,13 +28,11 @@ def ensure_internal_engine() -> None:
         PLAYER.write_bytes(engine_data)
         PLAYER.chmod(0o755)
 
-
 def natural_key(path: Path):
     return [
         int(part) if part.isdigit() else part.casefold()
         for part in re.split(r"(\d+)", path.name)
     ]
-
 
 def find_script(video: Path) -> Path | None:
     candidates = [
@@ -71,7 +44,6 @@ def find_script(video: Path) -> Path | None:
         if candidate.is_file():
             return candidate
     return None
-
 
 def script_candidates_for_deletion(
     video: Path,
@@ -85,7 +57,6 @@ def script_candidates_for_deletion(
     if selected_script is not None:
         candidates.insert(0, selected_script)
     return candidates
-
 
 class SolacePlayerGUI(tk.Tk):
     def __init__(self) -> None:
@@ -560,7 +531,7 @@ class SolacePlayerGUI(tk.Tk):
 
 
     def _current_funscript_position(self) -> float:
-        """Return interpolated current Funscript position as a 0..100 value."""
+
         if not self.graph_actions:
             return 50.0
         t = self.graph_position_ms
@@ -1714,12 +1685,3 @@ class SolacePlayerGUI(tk.Tk):
             except OSError:
                 pass
         self.destroy()
-
-
-def main() -> None:
-    app = SolacePlayerGUI()
-    app.mainloop()
-
-
-if __name__ == "__main__":
-    main()

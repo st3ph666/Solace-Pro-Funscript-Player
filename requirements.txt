@@ -1,1 +1,1 @@
-# Python standard library GUI; BLE engine dependencies may be required by the configured environment.
+bleak>=0.22
